@@ -50,6 +50,7 @@ class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
     this.closeOnComplete = false,
     this.actionsBuilder,
     InstaAssetCropDelegate cropDelegate = const InstaAssetCropDelegate(),
+    this.backButtonBuilder
   })  : _cropController =
             InstaAssetsCropController(keepScrollOffset, cropDelegate),
         super(
@@ -85,6 +86,9 @@ class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
 
   /// Whether the picker is mounted. Set to `false` if disposed.
   bool _mounted = true;
+
+  /// custom back button builder. It its null - default implementation will be used
+  final Function(BuildContext context)? backButtonBuilder;
 
   @override
   void dispose() {
@@ -410,6 +414,11 @@ class InstaAssetPickerBuilder extends DefaultAssetPickerBuilderDelegate {
       value: provider,
       builder: (_, __) => button,
     );
+  }
+
+  @override
+  Widget backButton(BuildContext context) {
+    return backButtonBuilder?.call(context) ?? super.backButton(context);
   }
 
   /// Returns most of the widgets of the layout, the app bar, the crop view and the grid view

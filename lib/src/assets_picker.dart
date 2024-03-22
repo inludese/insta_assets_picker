@@ -338,6 +338,7 @@ class InstaAssetPicker {
         specialItemBuilder,
     SpecialItemPosition? specialItemPosition,
     InstaPickerActionsBuilder? actionsBuilder,
+    Widget Function(BuildContext context)? backButtonBuilder
   }) async {
     final text = textDelegate ?? defaultTextDelegate(context);
 
@@ -379,6 +380,7 @@ class InstaAssetPicker {
       specialItemBuilder: specialItemBuilder,
       specialItemPosition: specialItemPosition,
       actionsBuilder: actionsBuilder,
+      backButtonBuilder: backButtonBuilder
     );
 
     return AssetPicker.pickAssetsWithDelegate(
